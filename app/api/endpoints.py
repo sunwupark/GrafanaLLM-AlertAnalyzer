@@ -13,7 +13,7 @@ from app.services.notification import send_email_alert
 
 app = FastAPI(
     title="Alert Analyzer",
-    description="시스템 알림을 분석하고 원인 및 해결책을 제안하는 서비스",
+    description="AI-Powered Alert Analysis System Using Grafana MCP and Large Language Models",
     version="1.0.0",
 )
 

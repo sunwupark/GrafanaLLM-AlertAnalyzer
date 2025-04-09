@@ -20,10 +20,7 @@ class ResponseFormat(BaseModel):
 
 
 async def create_analysis_agent():
-    # LLM 모델 초기화
     model = ChatOpenAI(model=settings.LLM_MODEL, api_key=settings.OPENAI_API_KEY)
-
-    # MCP 클라이언트 초기화
     client = MultiServerMCPClient(
         {
             "grafana": {

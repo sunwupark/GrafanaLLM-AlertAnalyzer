@@ -34,6 +34,15 @@ GrafanaLLM-AlertAnalyzer is an intelligent platform that combines the power of G
 - Docker (optional)
 - Grafana instance with API key
 - OpenAI API key
+- Grafana MCP binary files
+
+### Grafana MCP Setup
+You need to download and install the appropriate Grafana MCP binary files for your architecture:
+
+Visit the Grafana MCP releases page: https://github.com/grafana/mcp-grafana/releases
+Download the binary package that matches your system architecture
+Extract the files to your project directory (recommended: app/bin/mcp-grafana/)
+Make the binary executable with chmod +x <path-to-binary>
 
 ### Quick Start
 
@@ -120,6 +129,7 @@ grafanallm-alertanalyzer/
 ├── Dockerfile                # Docker image definition
 ├── Makefile                  # Build and development scripts
 ├── main.py                   # Application entry point
+├── mcp-grafana               # mcp-grafana binary file
 └── requirements.txt          # Dependency packages
 ```
 

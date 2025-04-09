@@ -7,8 +7,8 @@ from datetime import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-from app.core.config import settings
-from app.core.logging import logger
+from app.conf.config import settings
+from app.conf.logging import logger
 from app.utils.text import clean_text
 
 

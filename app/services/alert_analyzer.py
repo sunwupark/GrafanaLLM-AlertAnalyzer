@@ -2,7 +2,7 @@
 Alarm Analyze Service
 """
 
-from app.core.logging import logger
+from app.conf.logging import logger
 from app.services.agent import create_analysis_agent, create_analysis_prompt
 from app.utils.text import extract_analysis_sections
 

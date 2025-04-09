@@ -9,8 +9,8 @@ from langchain_openai import ChatOpenAI
 from langgraph.prebuilt import create_react_agent
 from pydantic import BaseModel, Field
 
-from app.core.config import settings
-from app.core.logging import logger
+from app.conf.config import settings
+from app.conf.logging import logger
 
 
 class ResponseFormat(BaseModel):

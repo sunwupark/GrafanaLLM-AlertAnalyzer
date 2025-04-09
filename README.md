@@ -118,7 +118,7 @@ grafanallm-alertanalyzer/
 │
 ├── app/                      # Application code
 │   ├── api/                  # API endpoints
-│   ├── core/                 # Core functionality and settings
+│   ├── conf/                 # Configs and settings
 │   ├── services/             # Business logic
 │   │   ├── agent.py          # LLM agent implementation
 │   │   ├── alert_analyzer.py # Alert analysis orchestration

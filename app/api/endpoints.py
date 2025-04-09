@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from fastapi import BackgroundTasks, FastAPI, Request
 
 from app.api.models import AnalysisResponse, HealthCheckResponse
-from app.core.logging import logger
+from app.conf.logging import logger
 from app.services.alert_analyzer import analyze_alert
 from app.services.notification import send_email_alert
 

@@ -39,8 +39,8 @@ GrafanaLLM-AlertAnalyzer is an intelligent platform that combines the power of G
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/grafanallm-alertanalyzer.git
-cd grafanallm-alertanalyzer
+git clone https://github.com/your-name/GrafanaLLM-AlertAnalyzer.git
+cd GrafanaLLM-AlertAnalyzer
 
 # Set up development environment
 make setup

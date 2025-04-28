@@ -9,6 +9,7 @@ COPY . /app
 
 # Make sure mcp-grafana is executable
 RUN chmod +x /app/mcp-grafana
+RUN chmod +x /app/github-mcp-server
 
 # Add mcp-grafana to PATH
 ENV PATH="/app:${PATH}"

@@ -1,24 +1,10 @@
-"""
-API endpoint definition
-"""
-
 from datetime import datetime, timezone
-
-from fastapi import BackgroundTasks, FastAPI, Request
-
+from fastapi import BackgroundTasks, Request
 from app.api.models import AnalysisResponse, HealthCheckResponse
 from app.conf.logging import logger
 from app.services.alert_analyzer import analyze_alert
 from app.services.notification import send_email_alert
 
-app = FastAPI(
-    title="Alert Analyzer",
-    description="AI-Powered Alert Analysis System Using Grafana MCP and Large Language Models",
-    version="1.0.0",
-)
-
-
-@app.post("/alert", response_model=AnalysisResponse)
 async def handle_alert(request: Request, background_tasks: BackgroundTasks):
     try:
         alert_data = await request.json()
@@ -50,7 +36,5 @@ async def handle_alert(request: Request, background_tasks: BackgroundTasks):
         logger.error(f"Error processing alert: {e}", exc_info=True)
         return {"status": "error", "message": str(e)}
 
-
-@app.get("/health", response_model=HealthCheckResponse)
 def health_check():
     return {"status": "ok", "timestamp": datetime.now(timezone.utc).isoformat()}

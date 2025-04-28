@@ -8,6 +8,17 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 load_dotenv()
 
+import operator
+from typing import Sequence, Annotated
+from typing_extensions import TypedDict
+
+from langchain_core.messages import BaseMessage
+
+# 상태 정의
+class AgentState(TypedDict):
+    messages: Annotated[Sequence[BaseMessage], operator.add]  # 메시지
+    next: str  # 다음으로 라우팅할 에이전트
+
 class Settings(BaseSettings):
     OPENAI_API_KEY: str = Field(
         default=os.getenv("OPENAI_API_KEY", ""),
@@ -48,6 +59,22 @@ class Settings(BaseSettings):
     LOG_LEVEL: str = Field(
         default=os.getenv("LOG_LEVEL", "INFO"),
         description="logging level"
+    )
+    GITHUB_TOKEN: str = Field(
+        default=os.getenv("GITHUB_TOKEN", ""),
+        description="GitHub Personal Access Token"
+    )
+    GITHUB_REPO_NAME: str = Field(
+        default=os.getenv("GITHUB_REPO_NAME", ""),
+        description="GitHub Repository Name"
+    )
+    GITHUB_REPO_OWNER: str = Field(
+        default=os.getenv("GITHUB_REPO_OWNER", ""),
+        description="GitHub Repository Owner"
+    )
+    TAVILY_API_KEY: str = Field(
+        default=os.getenv("TAVILY_API_KEY", ""),
+        description="Tavily API Key"
     )
     model_config = SettingsConfigDict(
         env_file=".env",

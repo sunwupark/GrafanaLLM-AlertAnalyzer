@@ -4,6 +4,8 @@ from app.api.models import AnalysisResponse, HealthCheckResponse
 from app.api.endpoints import handle_alert, health_check
 from app.graph.workflow import create_workflow_graph
 from app.conf.logging import logger
+from app.conf.config import settings
+import agentops
 
 app = FastAPI(
     title="Alert Analyzer",
@@ -18,6 +20,10 @@ async def startup_event():
         logger.info("Initializing workflow graph...")
         await create_workflow_graph()
         logger.info("Workflow graph initialized successfully")
+        agentops.init(
+            api_key=settings.AGENTOPS_API_KEY,
+            default_tags=['langchain']
+        )
     except Exception as e:
         logger.error(f"Failed to initialize workflow graph: {e}", exc_info=True)
         # 그래프 초기화 실패는 치명적이므로 서버를 종료

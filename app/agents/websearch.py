@@ -3,14 +3,15 @@ from langchain_openai import ChatOpenAI
 from langgraph.prebuilt import create_react_agent
 from pydantic import BaseModel, Field
 from langchain_tavily import TavilySearch
-
+import os
 from app.conf.config import settings
 
 async def create_websearch_agent():
     model = ChatOpenAI(model=settings.LLM_MODEL, api_key=settings.OPENAI_API_KEY)
     
-    # 도구를 리스트로 만들기
-    tavily_tool = TavilySearch(max_results=10, api_key=settings.TAVILY_API_KEY)
+    # 도구를 리스트로 만들기'
+    os.environ["TAVILY_API_KEY"] = settings.TAVILY_API_KEY
+    tavily_tool = TavilySearch(max_results=10)
     tools = [tavily_tool]
     
     # 웹 검색 에이전트를 위한 시스템 프롬프트

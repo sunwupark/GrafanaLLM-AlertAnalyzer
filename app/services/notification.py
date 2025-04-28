@@ -9,7 +9,7 @@ from email.mime.text import MIMEText
 
 from app.conf.config import settings
 from app.conf.logging import logger
-from app.utils.text import clean_text
+from app.utils.text import clean_text, format_html_text
 
 
 def send_email_alert(alert_description, analysis_result):
@@ -49,7 +49,7 @@ def send_email_alert(alert_description, analysis_result):
         
         <div style="border-left: 4px solid #5cb85c; padding-left: 15px;">
             <h3 style="color: #5cb85c;">Solution:</h3>
-            <p>{clean_text(analysis_result["solution"])}</p>
+            {format_html_text(analysis_result["solution"])}
         </div>
     </body>
     </html>

@@ -5,6 +5,7 @@ import os
 from dotenv import load_dotenv
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
+import agentops
 
 load_dotenv()
 
@@ -75,6 +76,10 @@ class Settings(BaseSettings):
     TAVILY_API_KEY: str = Field(
         default=os.getenv("TAVILY_API_KEY", ""),
         description="Tavily API Key"
+    )
+    AGENTOPS_API_KEY: str = Field(
+        default=os.getenv("AGENTOPS_API_KEY", ""),
+        description="AgentOps API Key"
     )
     model_config = SettingsConfigDict(
         env_file=".env",

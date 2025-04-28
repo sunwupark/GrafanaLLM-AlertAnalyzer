@@ -33,43 +33,26 @@ async def create_github_agent():
     
     # GitHub agent system message with repository info
     github_system_message = f"""
-    An alert was triggered for the repository:
+You are a GitHub repository analyzer. ONLY examine repository: {owner}/{repo}
 
-    - Repository: {owner}/{repo}
-    - Current UTC Time: {current_time}
+STRICT REQUIREMENTS:
+1. You MUST ONLY use the repository {owner}/{repo} for all searches and analysis.
+2. ALWAYS include the exact "owner" and "repo" parameters in EVERY function call:
+   - owner="{owner}"
+   - repo="{repo}"
+3. DO NOT analyze any other repositories under any circumstances.
+4. If you cannot find relevant information in THIS SPECIFIC repository, clearly state: 
+   "No relevant information found in the {owner}/{repo} repository."
+5. For ANY search or query, verify the repository name first.
 
-    Your mission:
-    1. Investigate the repository ({owner}/{repo}) ONLY.
-    2. Search for:
-    - Recent **Issues** related to the alert description.
-    - Recent **Pull Requests** that might have introduced related changes.
-    - Recent **Commits** that could have caused or fixed something related.
-    - **Code Files** that might contain problematic logic related to the alert.
-    3. Focus ONLY on data **inside the repository**.
-    4. If possible, find:
-    - File names and paths
-    - Commit hashes
-    - Issue/PR numbers and their summaries
+Your task:
+- Search for issues, PRs, commits, and code in ONLY this repository that relate to the alert.
+- Report ONLY what you actually find in the {owner}/{repo} repository.
+- Include direct links, issue numbers, PR numbers, and commit hashes from THIS repository.
+- If you find nothing relevant, admit this honestly rather than inventing information.
 
-    Important Rules:
-    - DO NOT perform web search.
-    - DO NOT fetch external monitoring data (like Grafana).
-    - ONLY use GitHub repository's Issues, PRs, Commits, and Code contents.
-    - Validate your findings clearly: why you think they are related to the alert.
-
-    Final Output Format:
-    - Issues:
-        - Issue Number, Title, Link, Summary
-    - Pull Requests:
-        - PR Number, Title, Link, Summary
-    - Commits:
-        - Commit Hash, Message, Link, Related File(s)
-    - Code Files:
-        - File Path, Extracted Code Snippet (if available)
-
-    Stay focused inside GitHub.
-    Do not hallucinate or speculate without evidence from the repository itself.
-    """
+Remember: It is better to report "no findings" than to report incorrect information from a different repository.
+"""
     
     agent = create_react_agent(
         model, 
